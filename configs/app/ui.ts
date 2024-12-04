@@ -55,8 +55,8 @@ const defaultColorTheme = (() => {
 const UI = Object.freeze({
   navigation: {
     logo: {
-      'default': '/static/xone-light.png',
-      dark: '/static/xone-dark.png',
+      'default': '/static/Xone_Scan_Logo_Light.svg',
+      dark: '/static/Xone_Scan_Logo_Dark.svg',
       // 'default': getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO'),
       // dark: getExternalAssetFilePath('NEXT_PUBLIC_NETWORK_LOGO_DARK'),
     },
