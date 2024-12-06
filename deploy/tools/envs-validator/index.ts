@@ -8,7 +8,7 @@ import schema from './schema';
 
 const silent = process.argv.includes('--silent');
 
-run();
+// run();
 
 async function run() {
   !silent && console.log();
