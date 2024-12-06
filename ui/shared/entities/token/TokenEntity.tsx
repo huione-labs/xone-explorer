@@ -6,6 +6,7 @@ import type { TokenInfo } from 'types/api/token';
 
 import { route } from 'nextjs-routes';
 
+import { getEnvValue } from 'configs/app/utils';
 import * as EntityBase from 'ui/shared/entities/base/components';
 import TokenLogoPlaceholder from 'ui/shared/TokenLogoPlaceholder';
 import TruncatedTextTooltip from 'ui/shared/TruncatedTextTooltip';
@@ -50,7 +51,7 @@ const Icon = (props: IconProps) => {
       { ...styles }
       borderRadius={ props.token.type === 'ERC-20' ? 'full' : 'base' }
       className={ props.className }
-      src={ props.token.icon_url ?? undefined }
+      src={ props.token.icon_url ?? getEnvValue('NEXT_PUBLIC_TOKEN_ICON_BASE_PATH')?.replace('[address]', props.token.address) }
       alt={ `${ props.token.name || 'token' } logo` }
       fallback={ <TokenLogoPlaceholder { ...styles }/> }
       fallbackStrategy={ props.token.icon_url ? 'onError' : 'beforeLoadOrError' }
