@@ -1,7 +1,7 @@
 import type { GridProps, HTMLChakraProps } from '@chakra-ui/react';
-import { Box, Grid, Flex, Text, Link, VStack, Skeleton, useColorModeValue, Button, SimpleGrid, Heading } from '@chakra-ui/react';
+import { Box, Grid, Flex, Text, Link, VStack, Skeleton, useColorModeValue, Button, SimpleGrid, Heading, useToast } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import type { CustomLinksGroup } from 'types/footerLinks';
 
@@ -255,16 +255,43 @@ const Footer = () => {
 };
 
 const Footer2 = () => {
+  const toast = useToast();
   const addOrSwitchChain = useAddOrSwitchChain();
+  const buttonColor = useColorModeValue('black', 'white');
+
+  const onAddChain = useCallback(async() => {
+    try {
+      await addOrSwitchChain();
+      toast({
+        position: 'top-right',
+        title: 'Success',
+        description: 'Successfully added network to your wallet',
+        status: 'success',
+        variant: 'subtle',
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        position: 'top-right',
+        title: 'Error',
+        description: (error as Error)?.message || 'Something went wrong',
+        status: 'error',
+        variant: 'subtle',
+        isClosable: true,
+      });
+    }
+  }, [ toast, addOrSwitchChain ]);
 
   return (
     <Box display={{ md: 'flex' }} as="footer" p={ 4 } borderTop="1px solid" borderColor="divider">
       <VStack alignItems="start" minH="140px" >
-        <Button colorScheme="gray" bgColor="#D9D9D9" onClick={ addOrSwitchChain } size="sm">
+        <Button variant="outline" borderColor="priRed.500" onClick={ onAddChain } _hover={{
+          borderColor: 'priRed.700',
+        }} size="sm">
           <IconSvg name={ WALLETS_INFO['metamask'].icon } boxSize={ 6 } mr="2"/>
-          <Text color="black">Add { chain.name }</Text>
+          <Text color={ buttonColor }>Add { chain.name }</Text>
         </Button>
-        <Text mt="auto" fontSize="sm" color="#828E9D">&copy; Xonescan 2024</Text>
+        <Text mt="auto" fontSize="sm" color="#828E9D">&copy; 2024 Xone.</Text>
       </VStack>
       <SimpleGrid mt={{ base: '5', md: '0' }} columns={{ base: 2, lg: 3 }} ml={{ md: 'auto' }} w="100%" maxW="500px" gap="4">
         <Links title="Xone" links={ [
@@ -297,14 +324,18 @@ const Footer2 = () => {
 };
 
 const Links = ({ title, links }: { title: string;links: Array<{ text: string;to: string }> }) => {
+  const titleColor = useColorModeValue('black', 'white');
+  const hoverColor = useColorModeValue('black', 'white');
   return (
     <Box>
-      <Heading fontSize="lg" color="black">{ title }</Heading>
+      <Heading fontSize="lg" color={ titleColor }>{ title }</Heading>
       <Box>
         { links.map((li, i) => {
           return (
             <Box key={ i } py="1">
-              <Text as="a" href={ li.to } color="#6B6A6A" fontSize="sm">{ li.text }</Text>
+              <Text as="a" href={ li.to } color="#6B6A6A" _hover={{
+                color: hoverColor,
+              }} fontSize="sm">{ li.text }</Text>
             </Box>
           );
         }) }
