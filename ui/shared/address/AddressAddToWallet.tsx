@@ -4,6 +4,7 @@ import React from 'react';
 import type { TokenInfo } from 'types/api/token';
 
 import config from 'configs/app';
+import { getEnvValue } from 'configs/app/utils';
 import useToast from 'lib/hooks/useToast';
 import * as mixpanel from 'lib/mixpanel/index';
 import useAddOrSwitchChain from 'lib/web3/useAddOrSwitchChain';
@@ -43,7 +44,7 @@ const AddressAddToWallet = ({ className, token, isLoading, variant = 'icon', ico
             address: token.address,
             symbol: token.symbol || '',
             decimals: Number(token.decimals) || 18,
-            image: token.icon_url || '',
+            image: token.icon_url || getEnvValue('NEXT_PUBLIC_TOKEN_ICON_BASE_PATH')?.replace('[address]', token.address),
           },
         },
       });
