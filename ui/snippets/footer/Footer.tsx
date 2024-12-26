@@ -295,20 +295,20 @@ const Footer2 = () => {
       </VStack>
       <SimpleGrid mt={{ base: '5', md: '0' }} columns={{ base: 2, lg: 3 }} ml={{ md: 'auto' }} w="100%" maxW="500px" gap="4">
         <Links title="Xone" links={ [
-          { text: 'Home', to: 'https://xone.plus/' },
-          { text: 'About', to: 'https://docs.xone.plus/study/xone' },
-          { text: 'Terms of Service', to: 'https://docs.xone.plus/study/service' },
-          { text: 'Privacy Policy', to: 'https://docs.xone.plus/study/privacy' },
+          { text: 'Home', to: 'https://xone.org' },
+          { text: 'About', to: 'https://docs.xone.org/study/xone' },
+          { text: 'Terms of Service', to: 'https://docs.xone.org/study/service' },
+          { text: 'Privacy Policy', to: 'https://docs.xone.org/study/privacy' },
           { text: 'Events', to: 'https://lu.ma/xone' },
         ] }/>
 
         <Links title="Developers" links={ [
-          { text: 'Docs', to: 'https://docs.xone.plus/developers/ready' },
-          { text: 'RPC Endpoints', to: 'https://docs.xone.plus/developers/rpc' },
-          { text: 'Tools', to: 'https://docs.xone.plus/developers/tools' },
-          { text: 'Faucets', to: 'https://faucet.xone.plus/' },
+          { text: 'Docs', to: 'https://docs.xone.org/developers/ready' },
+          { text: 'RPC Endpoints', to: 'https://docs.xone.org/developers/rpc' },
+          { text: 'Tools', to: 'https://docs.xone.org/developers/tools' },
+          { text: 'Faucets', to: 'https://faucet.xone.org/' },
           { text: 'Github', to: 'https://github.com/huione-labs' },
-          { text: 'Gmail', to: 'mailto:developers@xone.plus' },
+          { text: 'Gmail', to: 'mailto:developers@xone.org' },
         ] }/>
 
         <Links title="Community" links={ [
