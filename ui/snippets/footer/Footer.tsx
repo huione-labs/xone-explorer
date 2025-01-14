@@ -1,5 +1,5 @@
 import type { GridProps, HTMLChakraProps } from '@chakra-ui/react';
-import { Box, Grid, Flex, Text, Link, VStack, Skeleton, useColorModeValue, Button, SimpleGrid, Heading, useToast } from '@chakra-ui/react';
+import { Box, Grid, Flex, Text, Link, VStack, Skeleton, useColorModeValue, Button, SimpleGrid, Heading } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import React, { useCallback } from 'react';
 
@@ -11,6 +11,7 @@ import type { ResourceError } from 'lib/api/resources';
 import useApiQuery from 'lib/api/useApiQuery';
 import useFetch from 'lib/hooks/useFetch';
 import useIssueUrl from 'lib/hooks/useIssueUrl';
+import useToast from 'lib/hooks/useToast';
 import { copy } from 'lib/html-entities';
 import useAddOrSwitchChain from 'lib/web3/useAddOrSwitchChain';
 import { WALLETS_INFO } from 'lib/web3/wallets';
