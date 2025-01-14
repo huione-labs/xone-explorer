@@ -82,6 +82,7 @@ const TxDetailsDegraded = ({ hash, txQuery }: Props) => {
         confirmation_duration: null,
         status,
         block: tx.blockNumber ? Number(tx.blockNumber) : null,
+        block_number: tx.blockNumber ? Number(tx.blockNumber) : null,
         value: tx.value.toString(),
         gas_price: gasPrice?.toString() ?? null,
         base_fee_per_gas: block?.baseFeePerGas?.toString() ?? null,
