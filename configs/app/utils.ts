@@ -46,6 +46,7 @@ export const buildExternalAssetFilePath = (name: string, value: string) => {
     }
     return `/assets/configs/${ fileName }.${ fileExtension }`;
   } catch (error) {
+
     return;
   }
 };

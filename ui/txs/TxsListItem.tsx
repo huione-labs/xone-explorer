@@ -55,7 +55,7 @@ const TxsListItem = ({ tx, isLoading, showBlockInfo, currentAddress, enableTimeI
           truncation="constant_long"
           fontWeight="700"
           icon={{
-            name: tx.tx_types.includes('blob_transaction') ? 'blob' : undefined,
+            name: tx.tx_types?.includes?.('blob_transaction') ? 'blob' : undefined,
           }}
         />
         <TimeAgoWithTooltip
@@ -81,12 +81,12 @@ const TxsListItem = ({ tx, isLoading, showBlockInfo, currentAddress, enableTimeI
           </Skeleton>
         </Flex>
       ) }
-      { showBlockInfo && tx.block !== null && (
+      { showBlockInfo && (!tx.block || !tx.block_number) && (
         <Flex mt={ 2 }>
           <Skeleton isLoaded={ !isLoading } display="inline-block" whiteSpace="pre">Block </Skeleton>
           <BlockEntity
             isLoading={ isLoading }
-            number={ tx.block }
+            number={ tx.block || tx.block_number! }
             noIcon
           />
         </Flex>

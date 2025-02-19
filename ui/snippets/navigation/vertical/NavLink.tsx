@@ -54,6 +54,7 @@ const NavLink = ({ item, onClick, isCollapsed, isDisabled }: Props) => {
           color: isDisabled ? 'inherit' : 'link_hovered',
         },
       }}
+      cursor={ href ? 'pointer' : 'not-allowed' }
     >
       <Tooltip
         label={ item.text }
@@ -64,12 +65,13 @@ const NavLink = ({ item, onClick, isCollapsed, isDisabled }: Props) => {
         gutter={ 20 }
         color={ isInternalLink && item.isActive ? colors.text.active : colors.text.hover }
         margin={ 0 }
+
       >
         <HStack spacing={ 0 } overflow="hidden">
           <NavLinkIcon item={ item }/>
           <Text { ...styleProps.textProps } as="span" ml={ 3 }>
             <span>{ item.text }</span>
-            { !isInternalLink && <IconSvg name="link_external" boxSize={ 3 } color="icon_link_external" verticalAlign="middle"/> }
+            { !isInternalLink && href && <IconSvg name="link_external" boxSize={ 3 } color="icon_link_external" verticalAlign="middle"/> }
           </Text>
           { isHighlighted && (
             <LightningLabel iconColor={ styleProps.itemProps.bgColor } isCollapsed={ isCollapsed }/>

@@ -7,6 +7,7 @@ import * as tokenTransferMock from 'mocks/tokens/tokenTransfer';
 import * as decodedInputDataMock from 'mocks/txs/decodedInputData';
 
 export const base: Transaction = {
+  block_number: 29611750,
   base_fee_per_gas: '10000000000',
   block: 29611750,
   confirmation_duration: [

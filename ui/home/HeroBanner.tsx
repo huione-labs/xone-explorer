@@ -46,15 +46,15 @@ const HeroBanner = () => {
   return (
     <Flex
       w="100%"
-      // background={ background }
+      background={ background }
       border={ border }
       borderRadius="md"
-      // p={{ base: 4, lg: 8 }}
+      p={{ base: 4, lg: 8 }}
       columnGap={ 8 }
       alignItems="center"
     >
       <Box flexGrow={ 1 }>
-        { /* <Flex mb={{ base: 2, lg: 3 }} justifyContent="space-between" alignItems="center" columnGap={ 2 }>
+        <Flex mb={{ base: 2, lg: 3 }} justifyContent="space-between" alignItems="center" columnGap={ 2 }>
           <Heading
             as="h1"
             fontSize={{ base: '18px', lg: '30px' }}
@@ -77,7 +77,7 @@ const HeroBanner = () => {
               }
             </Box>
           ) }
-        </Flex> */ }
+        </Flex> 
         <SearchBar isHomepage/>
       </Box>
       { /* <AdBanner platform="mobile" w="fit-content" flexShrink={ 0 } borderRadius="md" overflow="hidden" display={{ base: 'none', lg: 'block ' }}/> */ }

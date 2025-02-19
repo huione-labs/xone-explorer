@@ -14,7 +14,7 @@ const Settings = () => {
   return (
     <Popover placement="bottom-start" trigger="click" isOpen={ isOpen } onClose={ onClose }>
       <PopoverTrigger>
-        <Box display="inline-block" p="2">
+        { /* <Box display="inline-block" p="2">
           <IconButton
             variant="simple"
             colorScheme="blue"
@@ -23,17 +23,16 @@ const Settings = () => {
             boxSize={ 5 }
             onClick={ onToggle }
           />
-          { /* <IconButton
-            display={{ lg: 'inline-block' }}
-            variant="simple"
-            colorScheme="blue"
-            aria-label="User settings"
-            icon={ <IconSvg name="menus_point" boxSize={ 5 }/> }
-            p="1px"
-            boxSize={ 5 }
-            onClick={ onToggle }
-          /> */ }
-        </Box>
+        </Box> */ }
+        <IconButton
+          variant="simple"
+          colorScheme="blue"
+          aria-label="User settings"
+          icon={ <IconSvg name="gear_slim" boxSize={ 5 }/> }
+          p="1px"
+          boxSize={ 5 }
+          onClick={ onToggle }
+        />
       </PopoverTrigger>
       <PopoverContent overflowY="hidden" w="auto" fontSize="sm">
         <PopoverBody boxShadow="2xl" p={ 4 }>

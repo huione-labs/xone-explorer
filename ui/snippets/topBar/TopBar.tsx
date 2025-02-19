@@ -13,7 +13,7 @@ const TopBar = () => {
   const bgColor = useColorModeValue('gray.50', 'whiteAlpha.100');
 
   return (
-    <Box bgColor={ bgColor } display={{ lg: 'none' }}>
+    <Box bgColor={ bgColor } >
       <Flex
         py={ 2 }
         px={{ base: 3, lg: 6 }}

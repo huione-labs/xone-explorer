@@ -1,16 +1,20 @@
 import type { GridProps, HTMLChakraProps } from '@chakra-ui/react';
-import { Box, Grid, Flex, Text, Link, VStack, Skeleton, useColorModeValue } from '@chakra-ui/react';
+import { Box, Grid, Flex, Text, Link, VStack, Skeleton, useColorModeValue, Button, SimpleGrid, Heading } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import type { CustomLinksGroup } from 'types/footerLinks';
 
 import config from 'configs/app';
+import chain from 'configs/app/chain';
 import type { ResourceError } from 'lib/api/resources';
 import useApiQuery from 'lib/api/useApiQuery';
 import useFetch from 'lib/hooks/useFetch';
 import useIssueUrl from 'lib/hooks/useIssueUrl';
+import useToast from 'lib/hooks/useToast';
 import { copy } from 'lib/html-entities';
+import useAddOrSwitchChain from 'lib/web3/useAddOrSwitchChain';
+import { WALLETS_INFO } from 'lib/web3/wallets';
 import IconSvg from 'ui/shared/IconSvg';
 import { CONTENT_MAX_WIDTH } from 'ui/shared/layout/utils';
 import NetworkAddToWallet from 'ui/shared/NetworkAddToWallet';
@@ -24,7 +28,7 @@ const MAX_LINKS_COLUMNS = 4;
 const FRONT_VERSION_URL = `https://github.com/blockscout/frontend/tree/${ config.UI.footer.frontendVersion }`;
 const FRONT_COMMIT_URL = `https://github.com/blockscout/frontend/commit/${ config.UI.footer.frontendCommit }`;
 
-// eslint-disable-next-line
+// @ts-ignore
 const Footer = () => {
 
   const { data: backendVersionData } = useApiQuery('config_backend_version', {
@@ -252,10 +256,92 @@ const Footer = () => {
 };
 
 const Footer2 = () => {
+  const toast = useToast();
+  const addOrSwitchChain = useAddOrSwitchChain();
+  const buttonColor = useColorModeValue('black', 'white');
+
+  const onAddChain = useCallback(async() => {
+    try {
+      await addOrSwitchChain();
+      toast({
+        position: 'top-right',
+        title: 'Success',
+        description: 'Successfully added network to your wallet',
+        status: 'success',
+        variant: 'subtle',
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        position: 'top-right',
+        title: 'Error',
+        description: (error as Error)?.message || 'Something went wrong',
+        status: 'error',
+        variant: 'subtle',
+        isClosable: true,
+      });
+    }
+  }, [ toast, addOrSwitchChain ]);
+
   return (
-    <Flex as="footer" h="60px" alignItems="center" p={ 4 } borderTop="1px solid" borderColor="divider">
-      <Text fontSize="sm" color="#828E9D">Xonescan &copy; 2024</Text>
-    </Flex>
+    <Box display={{ md: 'flex' }} as="footer" p={ 4 } borderTop="1px solid" borderColor="divider">
+      <VStack alignItems="start" minH="140px" >
+        <Button variant="outline" borderColor="priRed.500" onClick={ onAddChain } _hover={{
+          borderColor: 'priRed.700',
+        }} size="sm">
+          <IconSvg name={ WALLETS_INFO['metamask'].icon } boxSize={ 6 } mr="2"/>
+          <Text color={ buttonColor }>Add { chain.name }</Text>
+        </Button>
+        <Text mt="auto" fontSize="sm" color="#828E9D">&copy; 2024 Xone.</Text>
+      </VStack>
+      <SimpleGrid mt={{ base: '5', md: '0' }} columns={{ base: 2, lg: 3 }} ml={{ md: 'auto' }} w="100%" maxW="500px" gap="4">
+        <Links title="Xone" links={ [
+          { text: 'Home', to: 'https://xone.org' },
+          { text: 'About', to: 'https://docs.xone.org/study/xone' },
+          { text: 'Terms of Service', to: 'https://docs.xone.org/study/service' },
+          { text: 'Privacy Policy', to: 'https://docs.xone.org/study/privacy' },
+          { text: 'Events', to: 'https://lu.ma/xone' },
+        ] }/>
+
+        <Links title="Developers" links={ [
+          { text: 'Docs', to: 'https://docs.xone.org/developers/ready' },
+          { text: 'RPC Endpoints', to: 'https://docs.xone.org/developers/rpc' },
+          { text: 'Tools', to: 'https://docs.xone.org/developers/tools' },
+          { text: 'Faucets', to: 'https://faucet.xone.org/' },
+          { text: 'Github', to: 'https://github.com/huione-labs' },
+          { text: 'Gmail', to: 'mailto:developers@xone.org' },
+        ] }/>
+
+        <Links title="Community" links={ [
+          { text: 'Telegram', to: 'https://t.me/Xone_Group' },
+          { text: 'X', to: 'https://x.com/xone_chain' },
+          { text: 'Youtube', to: 'https://www.youtube.com/@HelloXone' },
+          { text: 'Medium', to: 'https://medium.com/@xone_chain' },
+        ] }/>
+
+      </SimpleGrid>
+    </Box>
+  );
+};
+
+const Links = ({ title, links }: { title: string;links: Array<{ text: string;to: string }> }) => {
+  const titleColor = useColorModeValue('black', 'white');
+  const hoverColor = useColorModeValue('black', 'white');
+  return (
+    <Box>
+      <Heading fontSize="lg" color={ titleColor }>{ title }</Heading>
+      <Box>
+        { links.map((li, i) => {
+          return (
+            <Box key={ i } py="1">
+              <Text as="a" href={ li.to } color="#6B6A6A" _hover={{
+                color: hoverColor,
+              }} fontSize="sm">{ li.text }</Text>
+            </Box>
+          );
+        }) }
+      </Box>
+    </Box>
   );
 };
 
