@@ -1,5 +1,13 @@
 {
+<<<<<<< HEAD
   "editor.formatOnSave": true,
   "i18n-ally.extract.autoDetect": true,
   "i18n-ally.keystyle": "nested",
+=======
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+    "files.autoSave": "off"
+>>>>>>> main
 }
