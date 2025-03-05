@@ -34,7 +34,7 @@ const consoleError = console.error;
 global.console = {
   ...console,
   error: (...args) => {
-    // silence some irrelevant errors
+    // silence some irrelevant errors 1
     if (args.some((arg) => typeof arg === 'string' && arg.includes('Using kebab-case for css properties'))) {
       return;
     }
